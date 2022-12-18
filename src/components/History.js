@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
+import { AuthContext } from "../contexts/auth";
 
-export default function History({ setVisible }) {
+export default function History() {
+	const { setVisible } = useContext(AuthContext);
 	useEffect(() => {
 		setVisible(true);
-	});
+	}, []);
 	return (
 		<StyledDiv>
 			<div>
