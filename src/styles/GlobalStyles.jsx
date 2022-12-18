@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import styled from 'styled-components';
+import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
@@ -30,6 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         line-height: 1;
         font-family: 'Lexend Deca', sans-serif;
+        margin: 70px 0;
     }
     ol, ul {
         list-style: none;
@@ -50,17 +51,38 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 `;
-// O botão e a div serão usados em mais de uma página, decidi colocar no global e exportar
+
 export const StyledButton = styled.button`
-    width: ${props => props.width};
-    height: ${props => props.height};
-    color: #FFFFFF;
-    background-color: #E8833A;
-    border-radius: 3px;
-    margin-right: 8px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  color: #ffffff;
+  background-color: #52b6ff;
+  border-radius: 5px;
+  font-size: ${(props) => props.fontSize};
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.2s;
+  font-family: 'Lexend Deca', sans-serif;
+  &:disabled{
+    filter: opacity(0.7);
+  }
 `;
+
+export const TextInput = styled.input`
+  width: 303px;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid #d5d5d5;
+  font-size: 20px;
+  margin-bottom: 6px;
+  padding: 10px;
+  font-family: 'Lexend Deca', sans-serif;
+  &::placeholder {
+    font-size: 20px;
+    color: #dbdbdb;
+  }
+  `;
