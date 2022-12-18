@@ -126,11 +126,11 @@ const StyledDiv = styled.div`
 		border: none;
 	}
 	.react-calendar__tile {
-		height: 30px;
-		max-width: 30px;
+		aspect-ratio: 1;
+		/* height: 60px; */
 		font-size: 15px;
 		padding: 0px;
-		margin: 8px;
+		/* margin: 8px; */
 	}
 	.done {
 		background-color: #8fc549;
