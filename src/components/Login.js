@@ -1,37 +1,62 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../contexts/auth";
 import { StyledButton, TextInput } from "../styles/GlobalStyles";
 import Loading from "./Loading";
 import logo from "../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export default function Login({ setVisible }) {
-	const [login, setLogin] = useState(false);
+export default function Login() {
+	const [loading, setLoading] = useState(false);
+	const [user,setUser] = useState({
+		email: "",
+		password: "",
+	});
+	const {setToken, setUserImage, setVisible} = useContext(AuthContext);
 	const navigate = useNavigate();
 	useEffect(() => {
-		setLogin(true);
+		setLoading(false);
 		setVisible(false);
-	});
+	}, []);
+
+	function handleChange(e) {
+		const { name, value } = e.target;
+		setUser({ ...user, [name]: value });
+	}
+
+	function handleSubmit(e){
+		e.preventDefault();
+		setLoading(true);
+		axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", user)
+		.then((response) => {
+			setToken(response.data.token);
+			setUserImage(response.data.image);
+			navigate("/hoje");
+		})
+		.catch(() => {
+			alert("Email ou senha incorretos");
+			setLoading(false);
+		});
+	}
+
 	return (
 		<StyledDiv>
 			<img src={logo} alt="logo" />
-			<form
-				onSubmit={(e) => {
-					e.preventDefault();
-					navigate("/habitos");
-				}}
-			>
-				<TextInput type="email" placeholder="email" />
-				<TextInput type="password" placeholder="senha" />
-				<StyledButton
-					type="submit"
-					width="303px"
-					height="45px"
-					fontSize="21px"
-				>
-					{login ? "Entrar" : <Loading />}
-				</StyledButton>
-			</form>
+			<fieldset disabled={loading}>
+				<form onSubmit={handleSubmit}>
+					<TextInput onChange={handleChange} name="email" value={user.email} type="email" placeholder="email" />
+					<TextInput onChange={handleChange} name="password" value={user.password} type="password" placeholder="senha" />
+					<StyledButton
+						type="submit"
+						width="303px"
+						height="45px"
+						fontSize="21px"
+					>
+						{loading ? <Loading /> : "Entrar"}
+					</StyledButton>
+				</form>
+			</fieldset>
 			<Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
 		</StyledDiv>
 	);
@@ -47,10 +72,12 @@ const StyledDiv = styled.div`
 	> img {
 		margin: 32px 0;
 	}
-	> form {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+	> fieldset {
+		> form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
 	}
 	> a {
 		margin-top: 25px;

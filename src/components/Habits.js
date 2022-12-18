@@ -1,35 +1,42 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { AuthContext } from "../contexts/auth";
 import Habit from "./Habit";
+import LoadingScreen from "./LoadingScreen";
 import NewTask from "./NewTask";
 
-const MOCK = [
-	{
-		id: 1,
-		name: "Nome do hábito",
-		days: [1, 3, 5],
-	},
-	{
-		id: 2,
-		name: "Nome do hábito 2",
-		days: [1, 3, 4, 6],
-	},
-];
-
-export default function Habits({ setVisible }) {
+export default function Habits() {
 	const [selected, setSelected] = useState([]);
 	const [habitName, setHabitName] = useState("");
 	const [expand, setExpand] = useState(0);
-	const habitsNumber = MOCK.length;
+	const [habits, setHabits] = useState(undefined);
 	const NoHabits = (
 		<p>
 			Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
 			começar a trackear!
 		</p>
 	);
+	const navigate = useNavigate();
+	const {setVisible, config} = useContext(AuthContext);
 	useEffect(() => {
 		setVisible(true);
-	});
+		axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
+		.then((response) => {
+			setHabits(response.data);
+		})
+		.catch(() => {
+			alert("Erro ao requisitar dados do servidor. Por favor logue novamente.");
+			navigate("/");
+		});
+	},[]);
+
+	if(habits === undefined) {
+		return <LoadingScreen />;
+	}
+	const habitsNumber = habits.length;
+
 	return (
 		<StyledDiv>
 			<div>
@@ -51,7 +58,7 @@ export default function Habits({ setVisible }) {
 				setHabitName={setHabitName}
 			/>
 			{habitsNumber === 0 && NoHabits}
-			{MOCK.map((habit) => (<Habit key={habit.id} name={habit.name} id={habit.id} days={habit.days} />))}
+			{habits.map((habit) => (<Habit key={habit.id} name={habit.name} id={habit.id} days={habit.days} />))}
 		</StyledDiv>
 	);
 }

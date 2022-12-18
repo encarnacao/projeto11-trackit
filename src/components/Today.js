@@ -1,48 +1,45 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { AuthContext } from "../contexts/auth";
 import styled from "styled-components";
 import Task from "./TodayTask";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
+import LoadingScreen from "./LoadingScreen";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const MOCK = [
-	{
-		id: 3,
-		name: "Acordar",
-		done: false,
-		currentSequence: 1,
-		highestSequence: 1,
-	},
-	{
-		id: 4,
-		name: "Estudar",
-		done: false,
-		currentSequence: 5,
-		highestSequence: 5,
-	},
-	{
-		id: 5,
-		name: "Exercicio",
-		done: false,
-		currentSequence: 1,
-		highestSequence: 3,
-	},
-];
-
-export default function Today({ setVisible }) {
+export default function Today() {
 	const today = dayjs().locale("pt-br").format("dddd, DD/MM");
-	console.log(today);
+	const { setVisible, todayHabits, setTodayHabits, config } =
+		useContext(AuthContext);
+	const navigate = useNavigate();
+	
 	useEffect(() => {
 		setVisible(true);
-	});
-	const done = MOCK.filter((habit) => habit.done).length;
-	const percentage = (done / MOCK.length) * 100;
-
+		axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
+		.then((response) => {
+			setTodayHabits(response.data);
+			console.log(response.data);
+		})
+		.catch(() => {
+			alert("Erro ao requisitar dados do servidor. Por favor logue novamente.");
+			navigate("/");
+		});
+	}, []);
+	
 	const noHabits = (
 		<p>
 			Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
 			começar a trackear!
 		</p>
 	);
+
+	if (todayHabits === undefined) {
+		return <LoadingScreen />;
+	}
+
+	const done = todayHabits.filter((habit) => habit.done).length;
+	const percentage = (done / todayHabits.length) * 100;
 
 	return (
 		<StyledDiv>
@@ -53,11 +50,11 @@ export default function Today({ setVisible }) {
 				) : (
 					<p>Nenhum hábito concluido ainda</p>
 				)}
-				{MOCK.length === 0 && noHabits}
+				{todayHabits.length === 0 && noHabits}
 				<Tasks>
-					{MOCK.map((habit) => (
+					{todayHabits.map((habit) => (
 						<Task
-                            key={habit.id}
+							key={habit.id}
 							habit={habit.name}
 							sequence={habit.currentSequence}
 							record={habit.highestSequence}
@@ -100,5 +97,5 @@ const StyledDiv = styled.div`
 
 const Tasks = styled.div`
 	width: 100%;
-    margin-top: 30px;
+	margin-top: 30px;
 `;

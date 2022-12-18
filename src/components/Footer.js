@@ -2,8 +2,19 @@ import styled from "styled-components";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/auth";
 
-export default function Footer({ visible, percentage }) {
+export default function Footer() {
+	const {visible, todayHabits} = useContext(AuthContext);
+	let percentage;
+	if(todayHabits === undefined || todayHabits.length === 0){
+		percentage = 0;
+	} else{
+		const done = todayHabits.filter((habit) => habit.done);
+		percentage = (done.length / todayHabits.length) * 100;
+	}
+
 	const progressbarStyle = {
 		text: {
 			fill: "#fff",

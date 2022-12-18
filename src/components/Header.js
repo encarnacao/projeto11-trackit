@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import logo from "../assets/header_logo.svg";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/auth";
 
-export default function Header({ visible, userImage }) {
+export default function Header() {
+	const { userImage, visible } = useContext(AuthContext);
 	return (
 		<StyledHeader visible={visible ? 1 : 0}>
 			<img src={logo} alt="logo" />
