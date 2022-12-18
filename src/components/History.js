@@ -6,6 +6,7 @@ export default function History() {
 	const { setVisible } = useContext(AuthContext);
 	useEffect(() => {
 		setVisible(true);
+		// eslint-disable-next-line
 	}, []);
 	return (
 		<StyledDiv>

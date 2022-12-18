@@ -16,8 +16,8 @@ export default function Login() {
 	const {setToken, setUserImage, setVisible} = useContext(AuthContext);
 	const navigate = useNavigate();
 	useEffect(() => {
-		setLoading(false);
 		setVisible(false);
+	// eslint-disable-next-line
 	}, []);
 
 	function handleChange(e) {

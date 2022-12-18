@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Habits from "./components/Habits";
@@ -10,8 +9,6 @@ import AuthProvider from "./contexts/auth";
 import SignUp from "./components/SignUp";
 
 function App() {
-	const MOCKIMAGE =
-		"https://wakatime.com/photo/b4a991a1-1a20-4148-9f89-b1c69527282a?s=420&cache=false&time=1671285163.8742568";
 	return (
 		<AuthProvider>
 			<Header />

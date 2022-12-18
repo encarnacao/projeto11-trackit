@@ -31,6 +31,7 @@ export default function Habits() {
 			alert("Erro ao requisitar dados do servidor. Por favor logue novamente.");
 			navigate("/");
 		});
+		// eslint-disable-next-line
 	},[expand, loading]);
 
 	if(habits === undefined || loading === true) {

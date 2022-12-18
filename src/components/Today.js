@@ -25,6 +25,7 @@ export default function Today() {
 			alert("Erro ao requisitar dados do servidor. Por favor logue novamente.");
 			navigate("/");
 		});
+		// eslint-disable-next-line
 	}, [loading]);
 	
 	const noHabits = (

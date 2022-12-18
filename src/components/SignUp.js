@@ -15,12 +15,13 @@ export default function SignUp() {
 		name: "",
 		image: "",
 	});
-	const {setVisible} = useContext(AuthContext);
+	const { setVisible } = useContext(AuthContext);
 	const navigate = useNavigate();
+
 	useEffect(() => {
-		setLoading(false);
 		setVisible(false);
-	}, []);
+		// eslint-disable-next-line
+	}, [setVisible]);
 
 	function handleChange(e) {
 		const { name, value } = e.target;

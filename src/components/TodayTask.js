@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import check from "../assets/check.png";
 import { AuthContext } from "../contexts/auth";
