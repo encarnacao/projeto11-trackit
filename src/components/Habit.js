@@ -1,11 +1,28 @@
 import styled from "styled-components";
 import {IoTrashOutline} from "react-icons/io5";
+import { AuthContext } from "../contexts/auth";
+import { useContext } from "react";
+import axios from "axios";
 
-export default function Habit({name, id, days}){
+export default function Habit({name, id, days, setLoading}){
     const weekdays = "DSTQQSS".split("");
+    const {config} = useContext(AuthContext);
+
+    function deleteHabit(){
+        setLoading(true);
+        axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config)
+        .then(()=>{
+            setLoading(false);
+        })
+        .catch(()=>{
+            alert("Erro ao deletar hábito. Tente novamente.");
+            setLoading(false);
+        });
+    }
+
     return (
         <StyledDiv>
-            <Trash onClick={()=>{alert(`Delete ${id}`)}}/>
+            <Trash onClick={deleteHabit}/>
             <h1>{name}</h1>
             <div>
                 {weekdays.map((day, index) => (<Day key={index} selected={days.includes(index)}>{day}</Day>))}

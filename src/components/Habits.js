@@ -12,6 +12,7 @@ export default function Habits() {
 	const [habitName, setHabitName] = useState("");
 	const [expand, setExpand] = useState(0);
 	const [habits, setHabits] = useState(undefined);
+	const [loading, setLoading] = useState(false);
 	const NoHabits = (
 		<p>
 			Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
@@ -30,9 +31,9 @@ export default function Habits() {
 			alert("Erro ao requisitar dados do servidor. Por favor logue novamente.");
 			navigate("/");
 		});
-	},[]);
+	},[expand, loading]);
 
-	if(habits === undefined) {
+	if(habits === undefined || loading === true) {
 		return <LoadingScreen />;
 	}
 	const habitsNumber = habits.length;
@@ -58,7 +59,7 @@ export default function Habits() {
 				setHabitName={setHabitName}
 			/>
 			{habitsNumber === 0 && NoHabits}
-			{habits.map((habit) => (<Habit key={habit.id} name={habit.name} id={habit.id} days={habit.days} />))}
+			{habits.map((habit) => (<Habit key={habit.id} name={habit.name} id={habit.id} days={habit.days} setLoading={setLoading}/>))}
 		</StyledDiv>
 	);
 }

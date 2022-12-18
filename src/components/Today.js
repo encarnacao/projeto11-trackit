@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../contexts/auth";
 import styled from "styled-components";
 import Task from "./TodayTask";
@@ -9,6 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Today() {
+	const [loading, setLoading] = useState(false);
 	const today = dayjs().locale("pt-br").format("dddd, DD/MM");
 	const { setVisible, todayHabits, setTodayHabits, config } =
 		useContext(AuthContext);
@@ -19,13 +20,12 @@ export default function Today() {
 		axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
 		.then((response) => {
 			setTodayHabits(response.data);
-			console.log(response.data);
 		})
 		.catch(() => {
 			alert("Erro ao requisitar dados do servidor. Por favor logue novamente.");
 			navigate("/");
 		});
-	}, []);
+	}, [loading]);
 	
 	const noHabits = (
 		<p>
@@ -55,10 +55,13 @@ export default function Today() {
 					{todayHabits.map((habit) => (
 						<Task
 							key={habit.id}
+							id={habit.id}
 							habit={habit.name}
 							sequence={habit.currentSequence}
 							record={habit.highestSequence}
 							done={habit.done}
+							loading={loading}
+							setLoading={setLoading}
 						/>
 					))}
 				</Tasks>

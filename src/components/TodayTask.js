@@ -1,8 +1,38 @@
+import axios from "axios";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import check from "../assets/check.png";
+import { AuthContext } from "../contexts/auth";
+import Loading from "./Loading";
 
-export default function Task({ habit, sequence, record, done }) {
+export default function Task({ id, habit, sequence, record, done, loading, setLoading}) {
 	const highestSequence = sequence === record;
+	const { config } = useContext(AuthContext);
+
+	function handleCheck() {
+		setLoading(true);
+		axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,{}, config)
+			.then(() => {
+				setLoading(false);
+			})
+			.catch(() => {
+				alert("Erro ao marcar hábito. Tente novamente.");
+				setLoading(false);
+			});
+	}
+
+	function handleUncheck(){
+		setLoading(true);
+		axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,{}, config)
+			.then(() => {
+				setLoading(false);
+			})
+			.catch(() => {
+				alert("Erro ao desmarcar hábito. Tente novamente.");
+				setLoading(false);
+			});
+	}
+
 	return (
 		<StyledDiv sequence={highestSequence ? 1 : 0}>
 			<div>
@@ -20,8 +50,8 @@ export default function Task({ habit, sequence, record, done }) {
 					</span>
 				</p>
 			</div>
-			<button className={done ? "done" : ""}>
-				<img src={check} alt="checkmark" />
+			<button onClick={done?handleUncheck:handleCheck} className={done ? "done" : ""}>
+				{loading?<Loading />:<img src={check} alt="checkmark" />}
 			</button>
 		</StyledDiv>
 	);

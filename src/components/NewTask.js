@@ -1,5 +1,9 @@
+import axios from "axios";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { AuthContext } from "../contexts/auth";
 import { StyledButton, TextInput } from "../styles/GlobalStyles";
+import Loading from "./Loading";
 
 export default function NewTask({
 	expand,
@@ -9,13 +13,36 @@ export default function NewTask({
 	habitName,
 	setHabitName,
 }) {
+	const [loading, setLoading] = useState(false);
+	const {config} = useContext(AuthContext);
+
     const days = "DSTQQSS".split("");
+
 	function handleSelection(index) {
 		if (selected.includes(index)) {
 			setSelected(selected.filter((item) => item !== index));
 		} else {
 			setSelected([...selected, index]);
 		}
+	}
+
+	function handleSubmit(){
+		const body = {
+			name: habitName,
+			days: selected
+		}
+		setLoading(true);
+		axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config)
+		.then(()=>{
+			setExpand(0);
+			setSelected([]);
+			setHabitName("");
+			setLoading(false);
+		})
+		.catch(()=>{
+			alert("Erro ao cadastrar hábito. Tente novamente.");
+			setLoading(false);
+		})
 	}
 
 	return (
@@ -28,6 +55,7 @@ export default function NewTask({
 					}}
 					value={habitName}
 					placeholder="nome do hábito"
+					disabled={loading}
 				/>
 				<div>
 					{days.map((day, index) => (
@@ -48,11 +76,12 @@ export default function NewTask({
 					onClick={() => {
 						setExpand(0);
 					}}
+					disabled={loading}
 				>
 					Cancelar
 				</button>
-				<StyledButton width="84px" height="35px" fontSize="16px">
-					Salvar
+				<StyledButton onClick={handleSubmit} width="84px" height="35px" fontSize="16px" disabled={loading}>
+					{loading ? <Loading /> : "Salvar"}
 				</StyledButton>
 			</div>
 		</NewTaskDiv>
