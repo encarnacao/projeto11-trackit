@@ -12,10 +12,12 @@ function AuthProvider({ children }) {
             Authorization: `Bearer ${token}`,
         },
     };
-    
-    
+    function autoLogin(){
+        setToken(localStorage.token);
+        setUserImage(localStorage.userImage);
+    }
     return (
-        <AuthContext.Provider value={{ userImage, config, setToken, setUserImage, visible, setVisible, todayHabits, setTodayHabits}}>
+        <AuthContext.Provider value={{ userImage, config, setToken, setUserImage, visible, setVisible, todayHabits, setTodayHabits, autoLogin}}>
             {children}
         </AuthContext.Provider>
     );

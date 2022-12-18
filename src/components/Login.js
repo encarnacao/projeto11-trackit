@@ -13,16 +13,15 @@ export default function Login() {
 		email: "",
 		password: "",
 	});
-	const {setToken, setUserImage, setVisible} = useContext(AuthContext);
+	const {setToken, setUserImage, setVisible, autoLogin} = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		setVisible(false);
-		if(localStorage.length>0){
-			setToken(localStorage.token);
-			setUserImage(localStorage.userImage);
-			navigate("/hoje");
+		if(localStorage.length> 0){
+			autoLogin();
+			navigate("/hoje")
 		}
+		setVisible(false);
 	// eslint-disable-next-line
 	}, []);
 
