@@ -4,10 +4,10 @@ import Footer from "./components/Footer";
 import Habits from "./components/Habits";
 import Header from "./components/Header";
 import Login from "./components/Login";
-import SignIn from "./components/SignIn";
 import Today from "./components/Today";
 import History from "./components/History";
 import AuthProvider from "./contexts/auth";
+import SignUp from "./components/SignUp";
 
 function App() {
 	const MOCKIMAGE =
@@ -19,7 +19,7 @@ function App() {
 				<Route path="/" element={<Login />} />
 				<Route
 					path="/cadastro"
-					element={<SignIn />}
+					element={<SignUp />}
 				/>
 				<Route
 					path="/habitos"

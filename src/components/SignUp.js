@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../contexts/auth";
 
-export default function SignIn() {
+export default function SignUp() {
 	const [loading, setLoading] = useState(false);
 	const [user, setUser] = useState({
 		email: "",
