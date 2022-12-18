@@ -15,8 +15,14 @@ export default function Login() {
 	});
 	const {setToken, setUserImage, setVisible} = useContext(AuthContext);
 	const navigate = useNavigate();
+
 	useEffect(() => {
 		setVisible(false);
+		if(localStorage.length>0){
+			setToken(localStorage.token);
+			setUserImage(localStorage.userImage);
+			navigate("/hoje");
+		}
 	// eslint-disable-next-line
 	}, []);
 
@@ -30,6 +36,8 @@ export default function Login() {
 		setLoading(true);
 		axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", user)
 		.then((response) => {
+			localStorage.setItem("token", response.data.token);
+			localStorage.setItem("userImage", response.data.image);
 			setToken(response.data.token);
 			setUserImage(response.data.image);
 			navigate("/hoje");
@@ -45,9 +53,10 @@ export default function Login() {
 			<img src={logo} alt="logo" />
 			<fieldset disabled={loading}>
 				<form onSubmit={handleSubmit}>
-					<TextInput onChange={handleChange} name="email" value={user.email} type="email" placeholder="email" />
-					<TextInput onChange={handleChange} name="password" value={user.password} type="password" placeholder="senha" />
+					<TextInput data-test="email-input" onChange={handleChange} name="email" value={user.email} type="email" placeholder="email" />
+					<TextInput data-test="password-input" onChange={handleChange} name="password" value={user.password} type="password" placeholder="senha" />
 					<StyledButton
+						data-test="login-btn"
 						type="submit"
 						width="303px"
 						height="45px"
@@ -57,7 +66,7 @@ export default function Login() {
 					</StyledButton>
 				</form>
 			</fieldset>
-			<Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
+			<Link to="/cadastro" data-test="signup-link">Não tem uma conta? Cadastre-se!</Link>
 		</StyledDiv>
 	);
 }

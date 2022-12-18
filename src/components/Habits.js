@@ -44,6 +44,7 @@ export default function Habits() {
 			<div>
 				<h1>Meus hábitos</h1>
 				<button
+					data-test="habit-create-btn"
 					onClick={() => {
 						setExpand(1);
 					}}

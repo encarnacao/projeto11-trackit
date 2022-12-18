@@ -45,11 +45,11 @@ export default function Today() {
 	return (
 		<StyledDiv>
 			<div>
-				<h1>{today[0].toUpperCase() + today.slice(1)}</h1>
+				<h1 data-test="today">{today[0].toUpperCase() + today.slice(1)}</h1>
 				{percentage > 0 ? (
-					<h2>{percentage.toFixed(0)}% dos hábitos concluídos</h2>
+					<h2 data-test="today-counter">{percentage.toFixed(0)}% dos hábitos concluídos</h2>
 				) : (
-					<p>Nenhum hábito concluido ainda</p>
+					<p data-test="today-counter">Nenhum hábito concluido ainda</p>
 				)}
 				{todayHabits.length === 0 && noHabits}
 				<Tasks>

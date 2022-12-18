@@ -34,23 +34,23 @@ export default function Task({ id, habit, sequence, record, done, loading, setLo
 	}
 
 	return (
-		<StyledDiv sequence={highestSequence ? 1 : 0}>
+		<StyledDiv sequence={highestSequence ? 1 : 0} data-test="today-habit-container">
 			<div>
-				<h1>{habit}</h1>
-				<p>
+				<h1 data-test="today-habit-name">{habit}</h1>
+				<p data-test="today-habit-sequence">
 					Sequência atual:{" "}
 					<span className={done ? "green" : ""}>
 						{sequence} dias{" "}
 					</span>
 				</p>
-				<p>
+				<p data-test="today-habit-record">
 					Seu record:{" "}
 					<span className={highestSequence && done? "green" : ""}>
 						{record} dias
 					</span>
 				</p>
 			</div>
-			<button onClick={done?handleUncheck:handleCheck} className={done ? "done" : ""}>
+			<button data-test="today-habit-check-btn" onClick={done?handleUncheck:handleCheck} className={done ? "done" : ""}>
 				{loading?<Loading />:<img src={check} alt="checkmark" />}
 			</button>
 		</StyledDiv>

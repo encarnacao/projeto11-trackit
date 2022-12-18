@@ -6,7 +6,7 @@ import { AuthContext } from "../contexts/auth";
 export default function Header() {
 	const { userImage, visible } = useContext(AuthContext);
 	return (
-		<StyledHeader visible={visible ? 1 : 0}>
+		<StyledHeader visible={visible ? 1 : 0} data-test="header">
 			<img src={logo} alt="logo" />
 			<img src={userImage} alt="user" />
 		</StyledHeader>

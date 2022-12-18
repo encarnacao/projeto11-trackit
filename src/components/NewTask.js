@@ -46,9 +46,10 @@ export default function NewTask({
 	}
 
 	return (
-		<NewTaskDiv expand={expand}>
+		<NewTaskDiv data-test="habit-create-container" expand={expand}>
 			<div>
 				<TextInput
+					data-test="habit-name-input"
 					type="text"
 					onChange={(e) => {
 						setHabitName(e.target.value);
@@ -60,6 +61,7 @@ export default function NewTask({
 				<div>
 					{days.map((day, index) => (
 						<DayButton
+							data-test="habit-day"
 							key={index}
 							selected={selected.includes(index) ? 1 : 0}
 							onClick={() => {
@@ -73,6 +75,7 @@ export default function NewTask({
 			</div>
 			<div>
 				<button
+					data-test="habit-create-cancel-btn"
 					onClick={() => {
 						setExpand(0);
 					}}
@@ -80,7 +83,7 @@ export default function NewTask({
 				>
 					Cancelar
 				</button>
-				<StyledButton onClick={handleSubmit} width="84px" height="35px" fontSize="16px" disabled={loading}>
+				<StyledButton data-test="habit-create-save-btn" onClick={handleSubmit} width="84px" height="35px" fontSize="16px" disabled={loading}>
 					{loading ? <Loading /> : "Salvar"}
 				</StyledButton>
 			</div>

@@ -30,12 +30,12 @@ export default function Habit({ name, id, days, setLoading }) {
 	}
 
 	return (
-		<StyledDiv>
-			<Trash onClick={deleteHabit} />
-			<h1>{name}</h1>
+		<StyledDiv data-test="habit-container">
+			<Trash data-test="habit-delete-btn" onClick={deleteHabit} />
+			<h1 data-test="habit-name">{name}</h1>
 			<div>
 				{weekdays.map((day, index) => (
-					<Day key={index} selected={days.includes(index)}>
+					<Day data-test="habit-day" key={index} selected={days.includes(index)}>
 						{day}
 					</Day>
 				))}

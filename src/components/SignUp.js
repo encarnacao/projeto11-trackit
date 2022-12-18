@@ -51,6 +51,7 @@ export default function SignUp() {
 			<fieldset disabled={loading}>
 				<form onSubmit={handleSubmit}>
 					<TextInput
+						data-test="email-input"
 						type="email"
 						onChange={handleChange}
 						value={user.email}
@@ -58,6 +59,7 @@ export default function SignUp() {
 						placeholder="email"
 					/>
 					<TextInput
+						data-test="password-input"
 						type="password"
 						onChange={handleChange}
 						value={user.password}
@@ -65,6 +67,7 @@ export default function SignUp() {
 						placeholder="senha"
 					/>
 					<TextInput
+						data-test="user-name-input"
 						type="text"
 						onChange={handleChange}
 						value={user.name}
@@ -72,6 +75,7 @@ export default function SignUp() {
 						placeholder="nome"
 					/>
 					<TextInput
+						data-test="user-image-input"
 						type="url"
 						onChange={handleChange}
 						value={user.image}
@@ -79,6 +83,7 @@ export default function SignUp() {
 						placeholder="foto"
 					/>
 					<StyledButton
+						data-test="signup-btn"
 						type="submit"
 						width="303px"
 						height="45px"
@@ -88,7 +93,7 @@ export default function SignUp() {
 					</StyledButton>
 				</form>
 			</fieldset>
-			<Link to="/">Já tem uma conta? Faça login!</Link>
+			<Link to="/" data-test="login-link">Já tem uma conta? Faça login!</Link>
 		</StyledDiv>
 	);
 }

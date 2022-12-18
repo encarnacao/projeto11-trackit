@@ -31,11 +31,11 @@ export default function Footer() {
 	};
 
 	return (
-		<StyledFooter visible={visible ? 1 : 0}>
-			<Link to="/habitos">
+		<StyledFooter visible={visible ? 1 : 0} data-test="menu">
+			<Link to="/habitos" data-test="habit-link">
 				<p>Hábitos</p>
 			</Link>
-			<Link to="/hoje">
+			<Link to="/hoje" data-test="today">
 				<CircularProgressbar
 					value={percentage}
 					text="Hoje"
@@ -44,7 +44,7 @@ export default function Footer() {
 					styles={progressbarStyle}
 				/>
 			</Link>
-			<Link to="/historico">
+			<Link to="/historico" data-test="history-link">
 				<p>Histórico</p>
 			</Link>
 		</StyledFooter>
