@@ -71,6 +71,18 @@ export default function History() {
 		}
 	}	
 
+	function formatDay(date){
+		const formattedDate = date.toLocaleDateString("pt-BR");
+		const day = formattedDate.split("/")[0];
+		console.log(date);
+		if (done.includes(formattedDate)){
+			return <div className="tile done">{day}</div>
+		} else if(undone.includes(formattedDate)){
+			return <div className="tile undone">{day}</div>
+		}
+		return <div className="tile">{day}</div>
+	}
+
 	return (
 		<StyledDiv>
 			<div>
@@ -80,20 +92,7 @@ export default function History() {
 				data-test="calendar"
 				calendarType="US"
 				onClickDay={(value) => {showHistory(value)}}
-				tileClassName={({ date, view }) => {
-					if (view === "month") {
-						const day = date.toLocaleDateString("pt-BR");
-						if (day === today) {
-							return "";
-						}
-						if (done.includes(day) && day !== today) {
-							return "done";
-						} else if (undone.includes(day)) {
-							return "undone";
-						}
-						return "";
-					}
-				}}
+				formatDay={(l,date) => {return formatDay(date)}}
 			/>
 		</StyledDiv>
 	);
@@ -126,18 +125,26 @@ const StyledDiv = styled.div`
 		border: none;
 	}
 	.react-calendar__tile {
-		aspect-ratio: 1;
-		/* height: 60px; */
+		height: 60px;
 		font-size: 15px;
 		padding: 0px;
-		/* margin: 8px; */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.tile{
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 	.done {
 		background-color: #8fc549;
-		border-radius: 50%;
+
 	}
 	.undone {
 		background-color: #ea5766;
-		border-radius: 50%;
 	}
 `;
