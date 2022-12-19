@@ -74,7 +74,6 @@ export default function History() {
 	function formatDay(date){
 		const formattedDate = date.toLocaleDateString("pt-BR");
 		const day = formattedDate.split("/")[0];
-		console.log(date);
 		if (done.includes(formattedDate)){
 			return <div className="tile done">{day}</div>
 		} else if(undone.includes(formattedDate)){
