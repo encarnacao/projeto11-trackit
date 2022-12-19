@@ -6,15 +6,12 @@ import "react-calendar/dist/Calendar.css";
 import axios from "axios";
 import LoadingScreen from "./LoadingScreen";
 import { useNavigate } from "react-router-dom";
-import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 
 export default function History() {
 	const [history, setHistory] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const { setVisible, config } = useContext(AuthContext);
-	const today = dayjs().locale("pt-br").format("DD/MM/YYYY");
-	console.log(today);
 	const done = [];
 	const undone = [];
 
@@ -28,7 +25,6 @@ export default function History() {
 			.then((response) => {
 				setHistory(response.data);
 				setLoading(false);
-				console.log(response.data);
 			})
 			.catch(() => {
 				alert("Houve um erro ao obter o histórico. Tente novamente.");
