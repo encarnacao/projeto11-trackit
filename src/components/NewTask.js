@@ -103,8 +103,6 @@ const NewTaskDiv = styled.div`
 	transition: all 0.5s;
 	> * {
 		display: ${(props) => (props.expand ? "flex" : "none")};
-		opacity: ${(props) => (props.expand ? "1" : "0")};
-		transition: opacity 1.5s;
 	}
 	> div:first-child {
 		flex-direction: column;
@@ -132,7 +130,7 @@ const NewTaskDiv = styled.div`
 	}
 `;
 
-const DayButton = styled.div`
+const DayButton = styled.button`
 	width: 30px;
 	height: 30px;
 	border-radius: 5px;

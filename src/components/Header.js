@@ -51,6 +51,7 @@ const StyledHeader = styled.header`
 		> img {
 			width: 51px;
 			height: 51px;
+			object-fit: cover;
 			border-radius: 50%;
 		}
 	}
