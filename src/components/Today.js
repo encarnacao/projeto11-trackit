@@ -14,7 +14,6 @@ export default function Today() {
 	const { setVisible, todayHabits, setTodayHabits, config } =
 		useContext(AuthContext);
 	const navigate = useNavigate();
-	
 	useEffect(() => {
 		setVisible(true);
 		axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)

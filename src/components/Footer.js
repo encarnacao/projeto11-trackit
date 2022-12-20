@@ -6,11 +6,11 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
 
 export default function Footer() {
-	const {visible, todayHabits} = useContext(AuthContext);
+	const { todayHabits } = useContext(AuthContext);
 	let percentage;
-	if(todayHabits === undefined || todayHabits.length === 0){
+	if (todayHabits === undefined || todayHabits.length === 0) {
 		percentage = 0;
-	} else{
+	} else {
 		const done = todayHabits.filter((habit) => habit.done);
 		percentage = (done.length / todayHabits.length) * 100;
 	}
@@ -31,7 +31,7 @@ export default function Footer() {
 	};
 
 	return (
-		<StyledFooter visible={visible ? 1 : 0} data-test="menu">
+		<StyledFooter data-test="menu">
 			<Link to="/habitos" data-test="habit-link">
 				<p>Hábitos</p>
 			</Link>
@@ -63,7 +63,6 @@ const StyledFooter = styled.footer`
 	align-items: center;
 	box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.05);
 	z-index: 1;
-	opacity: ${(props) => props.visible};
 	padding: 35px;
 	p {
 		font-size: 18px;

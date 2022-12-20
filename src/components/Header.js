@@ -2,13 +2,27 @@ import styled from "styled-components";
 import logo from "../assets/header_logo.svg";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
+import { AiOutlineLogout } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
-	const { userImage, visible } = useContext(AuthContext);
+	const { userImage, visible, setToken, setUserImage } = useContext(AuthContext);
+
+	const navigate = useNavigate();
+	function logout(){
+		localStorage.clear();
+		setToken("");
+		setUserImage("");
+		navigate("/");
+	}
+
 	return (
 		<StyledHeader visible={visible ? 1 : 0} data-test="header">
 			<img src={logo} alt="logo" />
-			<img src={userImage} alt="user" />
+			<div>
+				<AiOutlineLogout onClick={logout}/>
+				<img src={userImage} alt="user" />
+			</div>
 		</StyledHeader>
 	);
 }
@@ -26,10 +40,18 @@ const StyledHeader = styled.header`
 	padding: 0 18px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 	z-index: 1;
-	opacity: ${(props) => props.visible};
-	> img:last-child {
-		width: 51px;
-		height: 51px;
-		border-radius: 50%;
+	> div {
+		display: flex;
+		align-items: center;
+		> svg {
+			color: #fff;
+			font-size: 27px;
+			margin-right: 18px;
+		}
+		> img {
+			width: 51px;
+			height: 51px;
+			border-radius: 50%;
+		}
 	}
 `;

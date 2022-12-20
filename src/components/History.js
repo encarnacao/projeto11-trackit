@@ -83,12 +83,13 @@ export default function History() {
 			<div>
 				<h1>Histórico</h1>
 			</div>
-			<Calendar
-				data-test="calendar"
+			<div data-test="calendar">
+				<Calendar
 				calendarType="US"
 				onClickDay={(value) => {showHistory(value)}}
 				formatDay={(l,date) => {return formatDay(date)}}
 			/>
+			</div>
 		</StyledDiv>
 	);
 }
