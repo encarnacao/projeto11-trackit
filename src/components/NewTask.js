@@ -67,6 +67,7 @@ export default function NewTask({
 							onClick={() => {
 								handleSelection(index);
 							}}
+							disabled={loading}
 						>
 							{day}
 						</DayButton>
