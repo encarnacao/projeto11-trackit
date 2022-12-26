@@ -52,7 +52,7 @@ export default function Task({ id, habit, sequence, record, done, loading, setLo
 					</span>
 				</p>
 			</div>
-			<button data-test="today-habit-check-btn" onClick={done?handleUncheck:handleCheck} className={done ? "done" : ""}>
+			<button data-test="today-habit-check-btn" onClick={done?handleUncheck:handleCheck} className={done ? "done" : ""} disabled={loading}>
 				{(loading && clicked === id)?<Loading />:<img src={check} alt="checkmark" />}
 			</button>
 		</StyledDiv>
