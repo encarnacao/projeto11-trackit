@@ -1,23 +1,22 @@
 import { createContext, useState } from "react";
+import useStickyState from "../hooks/sticky";
 
 export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
-    const [userImage, setUserImage] = useState("");
+
     const [visible, setVisible] = useState(false);
-    const [token, setToken] = useState("");
+    const [token, setToken] = useStickyState("", "token");
+    const [userImage, setUserImage] = useStickyState("", "userImage");
     const [todayHabits, setTodayHabits] = useState(undefined);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     };
-    function autoLogin(){
-        setToken(localStorage.token);
-        setUserImage(localStorage.userImage);
-    }
+
     return (
-        <AuthContext.Provider value={{ userImage, config, setToken, setUserImage, visible, setVisible, todayHabits, setTodayHabits, autoLogin}}>
+        <AuthContext.Provider value={{ userImage, token, config, setToken, setUserImage, visible, setVisible, todayHabits, setTodayHabits}}>
             {children}
         </AuthContext.Provider>
     );

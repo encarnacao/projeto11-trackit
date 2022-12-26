@@ -50,39 +50,66 @@ export const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
     }
+    .dropdown-content {
+		z-index: 999;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+        animation: dropdown 0.2s;
+	}
+    .dropdown-item{
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        min-width: 80px;
+    }
+    .dropdown-arrow{
+        fill: #fff;
+    }
+    @keyframes dropdown {
+     0% {
+         opacity: 0;
+         transform: translateY(-10px);
+     }
+     100% {
+        opacity: 1;
+        transform: translateY(0);
+     }        
+    }
 `;
 
 export const StyledButton = styled.button`
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  color: #ffffff;
-  background-color: #52b6ff;
-  border-radius: 5px;
-  font-size: ${(props) => props.fontSize};
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  transition: filter 0.2s;
-  font-family: 'Lexend Deca', sans-serif;
-  &:disabled{
-    filter: opacity(0.7);
-  }
+	width: ${(props) => props.width};
+	height: ${(props) => props.height};
+	color: #ffffff;
+	background-color: #52b6ff;
+	border-radius: 5px;
+	font-size: ${(props) => props.fontSize};
+	display: flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	cursor: pointer;
+	transition: filter 0.2s;
+	font-family: "Lexend Deca", sans-serif;
+	&:disabled {
+		filter: opacity(0.7);
+	}
 `;
 
 export const TextInput = styled.input`
-  width: 303px;
-  height: 45px;
-  border-radius: 5px;
-  border: 1px solid #d5d5d5;
-  font-size: 20px;
-  margin-bottom: 6px;
-  padding: 10px;
-  font-family: 'Lexend Deca', sans-serif;
-  &::placeholder {
-    font-size: 20px;
-    color: #dbdbdb;
-  }
-  `;
+	width: 303px;
+	height: 45px;
+	border-radius: 5px;
+	border: 1px solid #d5d5d5;
+	font-size: 20px;
+	margin-bottom: 6px;
+	padding: 10px;
+	font-family: "Lexend Deca", sans-serif;
+	&::placeholder {
+		font-size: 20px;
+		color: #dbdbdb;
+	}
+`;

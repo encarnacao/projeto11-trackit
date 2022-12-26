@@ -13,13 +13,11 @@ export default function Login() {
 		email: "",
 		password: "",
 	});
-	const {setToken, setUserImage, setVisible, autoLogin} = useContext(AuthContext);
+	const {setToken, setUserImage, setVisible, token} = useContext(AuthContext);
 	const navigate = useNavigate();
-
 	useEffect(() => {
-		if(localStorage.length> 0){
-			autoLogin();
-			navigate("/hoje")
+		if(token){
+			navigate("/hoje");
 		}
 		setVisible(false);
 	// eslint-disable-next-line

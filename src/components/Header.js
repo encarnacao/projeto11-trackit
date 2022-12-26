@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import logo from "../assets/header_logo.svg";
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth";
 import { AiOutlineLogout } from "react-icons/ai";
@@ -20,8 +21,22 @@ export default function Header() {
 		<StyledHeader visible={visible ? 1 : 0} data-test="header">
 			<img src={logo} alt="logo" />
 			<div>
-				<AiOutlineLogout onClick={logout}/>
-				<img src={userImage} alt="user" />
+				<DropdownMenu.Root>
+
+					<DropdownMenu.Trigger asChild>
+						<img src={userImage} alt="user" />
+					</DropdownMenu.Trigger>
+
+					<DropdownMenu.Portal>
+						<DropdownMenu.Content className="dropdown-content">
+							<DropdownMenu.Item className="dropdown-item" onSelect={logout}>
+								Sair <AiOutlineLogout />
+							</DropdownMenu.Item>
+							<DropdownMenu.Arrow className="dropdown-arrow"/>
+						</DropdownMenu.Content>
+					</DropdownMenu.Portal>
+					
+				</DropdownMenu.Root>
 			</div>
 		</StyledHeader>
 	);
