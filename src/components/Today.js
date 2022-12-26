@@ -5,25 +5,16 @@ import Task from "./TodayTask";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import LoadingScreen from "./LoadingScreen";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export default function Today() {
 	const [loading, setLoading] = useState(false);
+	const [clicked, setClicked] = useState('');
 	const today = dayjs().locale("pt-br").format("dddd, DD/MM");
-	const { setVisible, todayHabits, setTodayHabits, config } =
+	const { setVisible, todayHabits, updateHabits } =
 		useContext(AuthContext);
-	const navigate = useNavigate();
 	useEffect(() => {
 		setVisible(true);
-		axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
-		.then((response) => {
-			setTodayHabits(response.data);
-		})
-		.catch(() => {
-			alert("Erro ao requisitar dados do servidor. Por favor logue novamente.");
-			navigate("/");
-		});
+		updateHabits();
 		// eslint-disable-next-line
 	}, [loading]);
 	
@@ -62,6 +53,8 @@ export default function Today() {
 							done={habit.done}
 							loading={loading}
 							setLoading={setLoading}
+							clicked={clicked}
+							setClicked={setClicked}
 						/>
 					))}
 				</Tasks>

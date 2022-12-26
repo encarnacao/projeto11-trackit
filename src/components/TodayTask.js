@@ -5,12 +5,13 @@ import check from "../assets/check.png";
 import { AuthContext } from "../contexts/auth";
 import Loading from "./Loading";
 
-export default function Task({ id, habit, sequence, record, done, loading, setLoading}) {
+export default function Task({ id, habit, sequence, record, done, loading, setLoading, clicked, setClicked}) {
 	const highestSequence = sequence === record;
 	const { config } = useContext(AuthContext);
 
 	function handleCheck() {
 		setLoading(true);
+		setClicked(id);
 		axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,{}, config)
 			.then(() => {
 				setLoading(false);
@@ -23,6 +24,7 @@ export default function Task({ id, habit, sequence, record, done, loading, setLo
 
 	function handleUncheck(){
 		setLoading(true);
+		setClicked(id);
 		axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,{}, config)
 			.then(() => {
 				setLoading(false);
@@ -51,7 +53,7 @@ export default function Task({ id, habit, sequence, record, done, loading, setLo
 				</p>
 			</div>
 			<button data-test="today-habit-check-btn" onClick={done?handleUncheck:handleCheck} className={done ? "done" : ""}>
-				{loading?<Loading />:<img src={check} alt="checkmark" />}
+				{(loading && clicked === id)?<Loading />:<img src={check} alt="checkmark" />}
 			</button>
 		</StyledDiv>
 	);

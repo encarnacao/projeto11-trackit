@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useState } from "react";
 import useStickyState from "../hooks/sticky";
 
@@ -15,8 +16,19 @@ function AuthProvider({ children }) {
         },
     };
 
+    const updateHabits = () => {
+        axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
+		.then((response) => {
+			setTodayHabits(response.data);
+		})
+		.catch(() => {
+			alert("Erro ao requisitar dados do servidor. Por favor logue novamente.");
+            window.location.href = "/";
+		});
+    }
+
     return (
-        <AuthContext.Provider value={{ userImage, token, config, setToken, setUserImage, visible, setVisible, todayHabits, setTodayHabits}}>
+        <AuthContext.Provider value={{ userImage, token, config, setToken, setUserImage, visible, setVisible, updateHabits, todayHabits, setTodayHabits}}>
             {children}
         </AuthContext.Provider>
     );
