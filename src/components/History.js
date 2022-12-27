@@ -14,12 +14,13 @@ export default function History() {
 	const [loading, setLoading] = useState(true);
 	const [open, setOpen] = useState(false);
 	const [habitsList, setHabitsList] = useState([]);
-	const { setVisible, config } = useContext(AuthContext);
+	const { setVisible, config, updateHabits } = useContext(AuthContext);
 	const done = [];
 	const undone = [];
 
 	const navigate = useNavigate();
 	useEffect(() => {
+		updateHabits();
 		axios
 			.get(
 				"https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/history/daily",
