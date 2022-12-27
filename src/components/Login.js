@@ -9,18 +9,20 @@ import axios from "axios";
 
 export default function Login() {
 	const [loading, setLoading] = useState(false);
-	const [user,setUser] = useState({
+	const [user, setUser] = useState({
 		email: "",
 		password: "",
 	});
-	const {setToken, setUserImage, setVisible, token} = useContext(AuthContext);
+	const [persist, setPersist] = useState(false);
+	const { setToken, setUserImage, setVisible, token } =
+		useContext(AuthContext);
 	const navigate = useNavigate();
 	useEffect(() => {
-		if(token){
+		if (token) {
 			navigate("/hoje");
 		}
 		setVisible(false);
-	// eslint-disable-next-line
+		// eslint-disable-next-line
 	}, []);
 
 	function handleChange(e) {
@@ -28,21 +30,27 @@ export default function Login() {
 		setUser({ ...user, [name]: value });
 	}
 
-	function handleSubmit(e){
+	function handleSubmit(e) {
 		e.preventDefault();
 		setLoading(true);
-		axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", user)
-		.then((response) => {
-			localStorage.setItem("token", response.data.token);
-			localStorage.setItem("userImage", response.data.image);
-			setToken(response.data.token);
-			setUserImage(response.data.image);
-			navigate("/hoje");
-		})
-		.catch(() => {
-			alert("Email ou senha incorretos");
-			setLoading(false);
-		});
+		axios
+			.post(
+				"https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",
+				user
+			)
+			.then((response) => {
+				if(persist){
+					localStorage.setItem("token", response.data.token);
+					localStorage.setItem("userImage", response.data.image);
+				}
+				setToken(response.data.token);
+				setUserImage(response.data.image);
+				navigate("/hoje");
+			})
+			.catch(() => {
+				alert("Email ou senha incorretos");
+				setLoading(false);
+			});
 	}
 
 	return (
@@ -50,8 +58,30 @@ export default function Login() {
 			<img src={logo} alt="logo" />
 			<fieldset disabled={loading}>
 				<form onSubmit={handleSubmit}>
-					<TextInput data-test="email-input" onChange={handleChange} name="email" value={user.email} type="email" placeholder="email" />
-					<TextInput data-test="password-input" onChange={handleChange} name="password" value={user.password} type="password" placeholder="senha" />
+					<TextInput
+						data-test="email-input"
+						onChange={handleChange}
+						name="email"
+						value={user.email}
+						type="email"
+						placeholder="email"
+					/>
+					<TextInput
+						data-test="password-input"
+						onChange={handleChange}
+						name="password"
+						value={user.password}
+						type="password"
+						placeholder="senha"
+					/>
+					<div>
+						<input
+							type="checkbox"
+							onChange={() => {
+								setPersist(!persist);
+							}}
+						/>{" Permanecer conectado"}
+					</div>
 					<StyledButton
 						data-test="login-btn"
 						type="submit"
@@ -63,7 +93,9 @@ export default function Login() {
 					</StyledButton>
 				</form>
 			</fieldset>
-			<Link to="/cadastro" data-test="signup-link">Não tem uma conta? Cadastre-se!</Link>
+			<Link to="/cadastro" data-test="signup-link">
+				Não tem uma conta? Cadastre-se!
+			</Link>
 		</StyledDiv>
 	);
 }
@@ -80,10 +112,19 @@ const StyledDiv = styled.div`
 		margin: 32px 0;
 	}
 	> fieldset {
+		width: 300px;
+		margin: 0 auto;
 		> form {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
+			width: 100%;
+
+			> div {
+				display: flex;
+				align-items: center;
+				margin: 5px 0;
+				> input {
+					margin-right: 5px;
+				}
+			}
 		}
 	}
 	> a {

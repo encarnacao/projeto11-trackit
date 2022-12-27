@@ -5,14 +5,29 @@ import check from "../assets/check.png";
 import { AuthContext } from "../contexts/auth";
 import Loading from "./Loading";
 
-export default function Task({ id, habit, sequence, record, done, loading, setLoading, clicked, setClicked}) {
+export default function Task({
+	id,
+	habit,
+	sequence,
+	record,
+	done,
+	loading,
+	setLoading,
+	clicked,
+	setClicked,
+}) {
 	const highestSequence = sequence === record;
 	const { config } = useContext(AuthContext);
 
 	function handleCheck() {
 		setLoading(true);
 		setClicked(id);
-		axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,{}, config)
+		axios
+			.post(
+				`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,
+				{},
+				config
+			)
 			.then(() => {
 				setLoading(false);
 			})
@@ -22,10 +37,15 @@ export default function Task({ id, habit, sequence, record, done, loading, setLo
 			});
 	}
 
-	function handleUncheck(){
+	function handleUncheck() {
 		setLoading(true);
 		setClicked(id);
-		axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,{}, config)
+		axios
+			.post(
+				`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,
+				{},
+				config
+			)
 			.then(() => {
 				setLoading(false);
 			})
@@ -36,24 +56,36 @@ export default function Task({ id, habit, sequence, record, done, loading, setLo
 	}
 
 	return (
-		<StyledDiv sequence={highestSequence ? 1 : 0} data-test="today-habit-container">
+		<StyledDiv
+			sequence={highestSequence ? 1 : 0}
+			data-test="today-habit-container"
+		>
 			<div>
 				<h1 data-test="today-habit-name">{habit}</h1>
 				<p data-test="today-habit-sequence">
-					Sequência atual: 
+					Sequência atual:{" "}
 					<span className={done ? "green" : ""}>
-						{sequence} dias{" "}
+						{sequence} dias.
 					</span>
 				</p>
 				<p data-test="today-habit-record">
-					Seu record: 
-					<span className={highestSequence && done? "green" : ""}>
+					Seu record:{" "}
+					<span className={highestSequence && done ? "green" : ""}>
 						{record} dias
 					</span>
 				</p>
 			</div>
-			<button data-test="today-habit-check-btn" onClick={done?handleUncheck:handleCheck} className={done ? "done" : ""} disabled={loading}>
-				{(loading && clicked === id)?<Loading />:<img src={check} alt="checkmark" />}
+			<button
+				data-test="today-habit-check-btn"
+				onClick={done ? handleUncheck : handleCheck}
+				className={done ? "done" : ""}
+				disabled={loading}
+			>
+				{loading && clicked === id ? (
+					<Loading />
+				) : (
+					<img src={check} alt="checkmark" />
+				)}
 			</button>
 		</StyledDiv>
 	);
