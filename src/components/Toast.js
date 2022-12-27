@@ -91,7 +91,7 @@ const ToastCSS = styled.div`
 		animation: hide 100ms ease-in;
 	}
 	.toast-root[data-swipe="move"] {
-		transform: translateX(var(--radix-toast-swipe-move-x));
+		transform: translateX(100%);
 	}
 	.toast-root[data-swipe="cancel"] {
 		transform: translateX(0);
@@ -121,10 +121,10 @@ const ToastCSS = styled.div`
 
 	@keyframes swipeOut {
 		from {
-			transform: translateX(var(--radix-toast-swipe-end-x));
+			transform: translateX(0);
 		}
 		to {
-			transform: translateX(calc(100% + var(--viewport-padding)));
+			transform: translateX(100%);
 		}
 	}
 `;
