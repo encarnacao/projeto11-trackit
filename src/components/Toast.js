@@ -91,7 +91,7 @@ const ToastCSS = styled.div`
 		animation: hide 100ms ease-in;
 	}
 	.toast-root[data-swipe="move"] {
-		transform: translateX(100%);
+		transform: translateX(var(--radix-toast-swipe-move-x));
 	}
 	.toast-root[data-swipe="cancel"] {
 		transform: translateX(0);
