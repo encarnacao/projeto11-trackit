@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IoTrashOutline } from "react-icons/io5";
 import { AuthContext } from "../contexts/auth";
 import { useContext, useState } from "react";
+import {RxCross2, RxCheck} from "react-icons/rx";
 import axios from "axios";
 
 export default function Habit({ name, id, days, setLoading }) {
@@ -53,9 +54,11 @@ export default function Habit({ name, id, days, setLoading }) {
 							setDeletion(false);
 						}}
 					>
-						Cancelar
+						<RxCross2 />
 					</button>
-					<button onClick={deleteHabit}>Deletar</button>
+					<button onClick={deleteHabit}>
+						<RxCheck />
+					</button>
 				</div>
 			</Deletion>
 		</StyledDiv>
@@ -116,30 +119,39 @@ const Deletion = styled.div`
 	overflow: hidden;
 	align-items: center;
 	justify-content: space-between;
+	> *{
+		transition: all ${(props) => (props.del ? "1s" : "0.5s")} ease-in-out;
+		opacity: ${(props) => (props.del ? "1" : "0")};
+	}
 	> p {
 		color: #fff;
 		font-size: 24px;
-		min-width: 200px;
 	}
 	> div {
-		min-width: 200px;
+		min-width: 150px;
+		display: flex;
+		justify-content: space-around;
 		> button {
-			width: 84px;
-			height: 35px;
+			width: 60px;
+			height: 60px;
 			border-radius: 5px;
 			border: none;
 			font-size: 16px;
 			color: #fff;
-			margin-left: 10px;
 			font-weight: 700;
 			font-family: "Lexend Deca", sans-serif;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			&:first-child {
 				background-color: #fff;
 				color: #666666;
+				font-size: 40px;
 			}
 			&:last-child {
 				background-color: #fff;
-				color: #ea5766;
+				color: #8fc549;
+				font-size: 40px;
 			}
 		}
 	}
