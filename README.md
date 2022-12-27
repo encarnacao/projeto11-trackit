@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# TrackIt
+Uma forma simples para manter o controle das tarefas diárias e observar sua evolução ao longo do tempo.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<center><img src=https://i.imgur.com/61VyHW6.gif></center>
 
-## Available Scripts
+O deploy para a aplicação pode ser encontrado em: [https://projeto11-trackit-fawn-six.vercel.app/](https://projeto11-trackit-fawn-six.vercel.app/)
 
-In the project directory, you can run:
+## Sobre o projeto
 
-### `npm start`
+Esta é uma aplicação web desenvolvida em ReactJS, com o objetivo de ajudar as pessoas a criarem e manterem seu controle de tarefas diárias. O usuário pode criar uma conta e adicionar tarefas, que serão armazenadas no banco de dados. O usuário também pode editar e excluir as tarefas, além de poder observar sua evolução ao longo do tempo.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Os features deste projeto são:
+- Cadastrar de usuário
+- Login
+- Criar de hábitos
+- Marcar/Desmarcar tarefas feitas
+- Histórico de tarefas em um calendário
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tecnologias
+As seguintes tecnologias foram utilizadas para o desenvolvimento do projeto:
 
-### `npm test`
+- ReactJS
+- Styled Components
+- Axios
+- React Router
+- React Icons
+- Radix UI
+- React Calendar
+- DayJS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Execução
+Para executar o projeto, siga os passos abaixo:
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+# Clone este repositório
+$ git clone https://github.com/cencarnacaoq/projeto11-trackit.git
+# Acesse a pasta do projeto no terminal/cmd
+$ cd projeto11-trackit
+# Instale as dependências
+$ npm install
+# Execute a aplicação em modo de desenvolvimento
+$ npm start
+# O servidor inciará na porta:3000 - acesse http://localhost:3000
+```
