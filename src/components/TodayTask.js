@@ -40,13 +40,13 @@ export default function Task({ id, habit, sequence, record, done, loading, setLo
 			<div>
 				<h1 data-test="today-habit-name">{habit}</h1>
 				<p data-test="today-habit-sequence">
-					Sequência atual:{" "}
+					Sequência atual: 
 					<span className={done ? "green" : ""}>
 						{sequence} dias{" "}
 					</span>
 				</p>
 				<p data-test="today-habit-record">
-					Seu record:{" "}
+					Seu record: 
 					<span className={highestSequence && done? "green" : ""}>
 						{record} dias
 					</span>

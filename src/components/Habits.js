@@ -20,8 +20,9 @@ export default function Habits() {
 		</p>
 	);
 	const navigate = useNavigate();
-	const {setVisible, config} = useContext(AuthContext);
+	const {setVisible, config, updateHabits} = useContext(AuthContext);
 	useEffect(() => {
+		updateHabits();
 		setVisible(true);
 		axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
 		.then((response) => {
@@ -68,7 +69,8 @@ export default function Habits() {
 
 const StyledDiv = styled.div`
 	width: 100%;
-	height: 100vh;
+	height: calc(100vh - 140px);
+	overflow-y: scroll;
 	margin: 0 auto;
 	display: flex;
 	align-items: center;

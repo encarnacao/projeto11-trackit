@@ -14,7 +14,7 @@ export default function NewTask({
 	setHabitName,
 }) {
 	const [loading, setLoading] = useState(false);
-	const {config, updateHabits} = useContext(AuthContext);
+	const {config} = useContext(AuthContext);
 
     const days = "DSTQQSS".split("");
 
@@ -38,7 +38,6 @@ export default function NewTask({
 			setSelected([]);
 			setHabitName("");
 			setLoading(false);
-			updateHabits();
 		})
 		.catch(()=>{
 			alert("Erro ao cadastrar hábito. Tente novamente.");
