@@ -33,7 +33,7 @@ Para executar o projeto, siga os passos abaixo:
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/cencarnacaoq/projeto11-trackit.git
+$ git clone https://github.com/encarnacao/projeto11-trackit
 # Acesse a pasta do projeto no terminal/cmd
 $ cd projeto11-trackit
 # Instale as dependências
